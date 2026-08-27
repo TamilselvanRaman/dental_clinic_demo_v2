@@ -1169,6 +1169,12 @@
       .header-right-text {
         display: none;
       }
+      .intro-header {
+        text-align: center;
+      }
+      .intro-title {
+        font-size: 2.2rem;
+      }
       section {
         padding: 60px 0;
       }
@@ -1194,26 +1200,75 @@
         width: 100%;
         height: auto;
       }
-      .team-member-float {
-        position: static;
-        margin: 10px;
-        display: inline-block;
-      }
       .team-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 16px;
         height: auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 20px 0;
+        padding: 40px 16px;
       }
       .team-title-box {
+        grid-column: span 2;
+        order: -1;
+        margin-bottom: 20px;
         width: 100%;
+        box-sizing: border-box;
+      }
+      .team-member-float {
+        position: static;
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        background-color: var(--color-bg-cream);
+        border: 2px solid var(--color-bg-light);
+        padding: 12px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .team-member-float img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 14px;
+        margin-bottom: 10px;
+      }
+      .team-member-float::after {
+        display: none !important;
+      }
+      .member-info-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin-top: 4px;
+        width: 100%;
+      }
+      .member-name-mobile {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--color-text-dark);
+      }
+      .member-role-mobile {
+        font-size: 0.8rem;
+        color: var(--color-primary);
+        font-weight: 600;
       }
       .news-grid {
         grid-template-columns: 1fr;
       }
       .testimonials-right {
-        flex-direction: column-reverse;
+        flex-direction: column;
+        gap: 24px;
+      }
+      .testimonial-controls {
+        flex-direction: row;
+        justify-content: center;
+        gap: 16px;
       }
       .footer-nav {
         grid-template-columns: 1fr;
@@ -1223,6 +1278,22 @@
         flex-direction: column;
         gap: 20px;
         align-items: flex-start;
+      }
+      .footer-watermark {
+        font-size: 13vw;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero-card {
+        padding: 30px 20px;
+      }
+      .hero-title {
+        font-size: 2.1rem;
+        letter-spacing: -1px;
+      }
+      .intro-title {
+        font-size: 1.8rem;
       }
     }
 
@@ -1704,21 +1775,45 @@
       <!-- Floating Avatars -->
       <div class="team-member-float member-1" data-name="Dr. Sarah Jenkins - Lead Orthodontist">
         <img src="images/doctor_1.png" alt="Dr. Sarah Jenkins">
+        <div class="member-info-mobile">
+          <span class="member-name-mobile">Dr. Sarah Jenkins</span>
+          <span class="member-role-mobile">Lead Orthodontist</span>
+        </div>
       </div>
       <div class="team-member-float member-2" data-name="Dr. Marcus Vance - Cosmetic Specialist">
         <img src="images/doctor_2.png" alt="Dr. Marcus Vance">
+        <div class="member-info-mobile">
+          <span class="member-name-mobile">Dr. Marcus Vance</span>
+          <span class="member-role-mobile">Cosmetic Specialist</span>
+        </div>
       </div>
       <div class="team-member-float member-3" data-name="Dr. Evelyn Reed - Pediatric Dentist">
         <img src="images/doctor_3.png" alt="Dr. Evelyn Reed">
+        <div class="member-info-mobile">
+          <span class="member-name-mobile">Dr. Evelyn Reed</span>
+          <span class="member-role-mobile">Pediatric Dentist</span>
+        </div>
       </div>
       <div class="team-member-float member-4" data-name="Dr. Alan Sterling - Implantologist">
         <img src="images/doctor_4.png" alt="Dr. Alan Sterling">
+        <div class="member-info-mobile">
+          <span class="member-name-mobile">Dr. Alan Sterling</span>
+          <span class="member-role-mobile">Implantologist</span>
+        </div>
       </div>
       <div class="team-member-float member-5" data-name="Dr. Chloe Bennett - General Practitioner">
         <img src="images/doctor_1.png" alt="Dr. Chloe Bennett" style="transform: scaleX(-1);">
+        <div class="member-info-mobile">
+          <span class="member-name-mobile">Dr. Chloe Bennett</span>
+          <span class="member-role-mobile">General Practitioner</span>
+        </div>
       </div>
       <div class="team-member-float member-6" data-name="Dr. Ryan Patel - Emergency Care">
         <img src="images/doctor_2.png" alt="Dr. Ryan Patel" style="filter: hue-rotate(15deg);">
+        <div class="member-info-mobile">
+          <span class="member-name-mobile">Dr. Ryan Patel</span>
+          <span class="member-role-mobile">Emergency Care</span>
+        </div>
       </div>
 
       <!-- Main Team Title Box -->
