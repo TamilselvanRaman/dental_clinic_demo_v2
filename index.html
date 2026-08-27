@@ -223,19 +223,39 @@
       height: 600px;
       border-radius: var(--border-radius-lg);
       overflow: hidden;
-      background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.5) 100%), url('images/hero_smile.png');
-      background-size: cover;
-      background-position: center;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       padding: 60px;
       color: var(--color-text-light);
       box-shadow: var(--shadow-premium);
+      background-color: var(--color-bg-light);
+    }
+
+    /* Main background image animate wrapper */
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.5) 100%), url('images/hero_smile.png');
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+      opacity: 0;
+      transform: scale(1.04);
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: 200ms;
+    }
+
+    .animated .hero-card::before {
+      opacity: 1;
+      transform: scale(1);
     }
 
     .hero-title-wrap {
       max-width: 800px;
+      position: relative;
+      z-index: 2;
     }
 
     .hero-title {
@@ -251,6 +271,8 @@
       align-items: flex-end;
       justify-content: space-between;
       width: 100%;
+      position: relative;
+      z-index: 2;
     }
 
     .hero-desc-wrap {
@@ -1511,6 +1533,61 @@
     .footer-bottom-links a:hover {
       color: #FFFFFF !important;
     }
+
+    /* Scroll Reveal Animations */
+    .reveal-left,
+    .reveal-right,
+    .reveal-scale {
+      opacity: 0;
+      will-change: transform, opacity;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-left {
+      transform: translateX(-60px);
+    }
+
+    .reveal-right {
+      transform: translateX(60px);
+    }
+
+    .reveal-scale {
+      transform: scale(0.95) translateY(20px);
+    }
+
+    /* Trigger state when parent section is active (animated) */
+    .animated .reveal-left,
+    .animated .reveal-right {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .animated .reveal-scale {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    /* Staggered transition delays */
+    .delay-1 {
+      transition-delay: 150ms;
+    }
+    .delay-2 {
+      transition-delay: 300ms;
+    }
+    .delay-3 {
+      transition-delay: 450ms;
+    }
+
+    /* Hover transform overrides to prevent scroll-reveal override */
+    .service-card:hover {
+      transform: translateY(-6px) !important;
+    }
+    .facility-card:hover {
+      transform: translateY(-10px) scale(1.02) !important;
+    }
+    .news-card:hover {
+      transform: translateY(-8px) !important;
+    }
   </style>
 </head>
 <body>
@@ -1553,20 +1630,20 @@
         </svg>
 
         <!-- Glassmorphism Inset Card -->
-        <div class="hero-glass-card">
+        <div class="hero-glass-card reveal-left delay-3">
           <img src="images/hero_inset_treatment.png" alt="Refined treatment" class="hero-glass-img">
           <div class="hero-glass-text">
             Refined Dental Treatments, Tailored For You.
           </div>
         </div>
 
-        <div class="hero-title-wrap">
+        <div class="hero-title-wrap reveal-left delay-1">
           <h1 class="hero-title">
             Experienced Dental<br>Care Professionals
           </h1>
         </div>
 
-        <div class="hero-bottom">
+        <div class="hero-bottom reveal-left delay-2">
           <div class="hero-desc-wrap">
             <p class="hero-desc">
               Our Clinic Offers A Seamless Blend Of Advanced Technology, Personalized Treatment.
@@ -1588,22 +1665,22 @@
   <section class="intro-section animated" id="about" style="opacity: 0;">
     <div class="container">
       <div class="intro-header">
-        <h2 class="intro-title">
+        <h2 class="intro-title reveal-left">
           Transforming Dental<br>Visits Into <span class="text-stroke">Comfortable.</span>
         </h2>
-        <p class="intro-paragraph">
+        <p class="intro-paragraph reveal-right">
           That's Why We've Made It Our Mission To Transform Dental Care Into A Calming, Stress-Free Experience. From The Moment You Walk Through Our Doors, You'll Be Greeted By A Warm, Welcoming Team.
         </p>
       </div>
 
       <div class="stats-row">
         <!-- Card 1: Dental braces mold image -->
-        <div class="stats-card-img">
+        <div class="stats-card-img reveal-left delay-1">
           <img src="images/braces_mold.png" alt="Dental braces mold">
         </div>
 
         <!-- Card 2: Stat card -->
-        <div class="stats-card-solid">
+        <div class="stats-card-solid reveal-scale delay-2">
           <div class="stats-icon-wrap">
             <svg viewBox="0 0 24 24">
               <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"></path>
@@ -1614,7 +1691,7 @@
         </div>
 
         <!-- Card 3: Patient image -->
-        <div class="stats-card-img">
+        <div class="stats-card-img reveal-right delay-3">
           <img src="images/patient_smiling.png" alt="Patient smiling">
         </div>
       </div>
@@ -1628,14 +1705,14 @@
       
       <div class="services-layout">
         <!-- Left Image -->
-        <div class="services-left">
+        <div class="services-left reveal-left">
           <img src="images/dentist_examining.png" alt="Dentist examining patient">
         </div>
 
         <!-- Right Services Grid -->
         <div class="services-grid">
           <!-- Card 1 -->
-          <div class="service-card highlighted">
+          <div class="service-card highlighted reveal-right">
             <div class="service-card-top">
               <div class="arrow-circle">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1653,7 +1730,7 @@
           </div>
 
           <!-- Card 2 -->
-          <div class="service-card">
+          <div class="service-card reveal-right delay-1">
             <div class="service-card-top">
               <div class="arrow-circle">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1671,7 +1748,7 @@
           </div>
 
           <!-- Card 3 -->
-          <div class="service-card">
+          <div class="service-card reveal-right delay-2">
             <div class="service-card-top">
               <div class="arrow-circle">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1689,7 +1766,7 @@
           </div>
 
           <!-- Card 4 -->
-          <div class="service-card">
+          <div class="service-card reveal-right delay-3">
             <div class="service-card-top">
               <div class="arrow-circle">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1714,7 +1791,7 @@
   <section class="facilities-section animated" style="opacity: 0;">
     <div class="container">
       <div class="facilities-layout">
-        <div class="facilities-left">
+        <div class="facilities-left reveal-left">
           <h2 class="section-title">Our Modern<br>Dental Facilities</h2>
           <p class="facilities-side-text">
             Equipped To Provide You With The Highest Standard Of Care In A Calming, Fully Ergonomic Dental Environment.
@@ -1726,7 +1803,7 @@
 
         <div class="facilities-right">
           <!-- Card 1: Invisalign (Tilted) -->
-          <div class="facility-card invisalign">
+          <div class="facility-card invisalign reveal-right">
             <div class="facility-card-icon">
               <svg viewBox="0 0 24 24">
                 <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12C20,14.4 19,16.5 17.3,18L16.4,17.1C17.7,15.8 18.5,14 18.5,12C18.5,8.4 15.6,5.5 12,5.5C8.4,5.5 5.5,8.4 5.5,12C5.5,14 6.3,15.8 7.6,17.1L6.7,18C5,16.5 4,14.4 4,12A8,8 0 0,1 12,4Z"></path>
@@ -1739,7 +1816,7 @@
           </div>
 
           <!-- Card 2: Ceramic Braces -->
-          <div class="facility-card">
+          <div class="facility-card reveal-right delay-1">
             <div class="facility-card-icon">
               <svg viewBox="0 0 24 24">
                 <path d="M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9S16.97,3,12,3z M12,19c-3.86,0-7-3.14-7-7s3.14-7,7-7s7,3.14,7,7S15.86,19,12,19z M12,9c-1.66,0-3,1.34-3,3s1.34,3,3,3s3-1.34,3-3S13.66,9,12,9z"></path>
@@ -1752,7 +1829,7 @@
           </div>
 
           <!-- Card 3: Braces -->
-          <div class="facility-card">
+          <div class="facility-card reveal-right delay-2">
             <div class="facility-card-icon">
               <svg viewBox="0 0 24 24">
                 <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6Z"></path>
@@ -1838,7 +1915,7 @@
       
       <div class="news-grid">
         <!-- Card 1 -->
-        <div class="news-card">
+        <div class="news-card reveal-scale">
           <div class="news-img-box">
             <img src="images/news_chewing_gum.png" alt="The Oral Health Benefits Of Chewing Gum">
           </div>
@@ -1855,7 +1932,7 @@
         </div>
 
         <!-- Card 2 -->
-        <div class="news-card">
+        <div class="news-card reveal-scale delay-1">
           <div class="news-img-box">
             <img src="images/news_loose_tooth.png" alt="How To Treat A Loose Tooth In Adults">
           </div>
@@ -1872,7 +1949,7 @@
         </div>
 
         <!-- Card 3 -->
-        <div class="news-card">
+        <div class="news-card reveal-scale delay-2">
           <div class="news-img-box">
             <img src="images/news_teeth_whitening.png" alt="Natural Ways To Whiten In a Healthy Way">
           </div>
@@ -1896,7 +1973,7 @@
     <div class="container">
       <div class="testimonials-layout">
         
-        <div class="testimonials-left">
+        <div class="testimonials-left reveal-left">
           <h2 class="section-title">What Our<br>Patients Say</h2>
           <p class="testimonials-tagline">
             We Take Pride In Creating Healthy, Confident Smiles.
@@ -1905,7 +1982,7 @@
 
         <div class="testimonials-right">
           <!-- Testimonial Slider Wrapper -->
-          <div class="testimonial-card-wrap">
+          <div class="testimonial-card-wrap reveal-right delay-1">
             <div class="testimonial-card">
               <span class="quote-icon">“</span>
               <p class="testimonial-text" id="testimonial-quote">
